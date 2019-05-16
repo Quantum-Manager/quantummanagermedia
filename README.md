@@ -12,7 +12,7 @@ GPLv3
 ### Требования
 - Joomla >=3.7
 - PHP >=5.6
-- Quantum Manager (https://github.com/Delo-Design/quantummanager)
+- [Quantum Manager](https://github.com/Delo-Design/quantummanager)
 
 ### Разработчик
 Компания "Деловой дизайн" https://delo-design.ru
