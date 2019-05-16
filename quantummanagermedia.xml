@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="3.8" group="system" method="upgrade">
+	<name>PLG_QUANTUMMANAGERMEDIA</name>
+	<creationDate>03.05.2019</creationDate>
+	<author>Cymbal</author>
+	<authorEmail>cymbal@delo-design.ru</authorEmail>
+	<authorUrl>https://delo-design.ru</authorUrl>
+	<copyright>Copyright (C) 2019 "Delo Design". All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>1.0</version>
+	<description>PLG_QUANTUMMANAGERMEDIA_XML_DESCRIPTION</description>
+
+	<scriptfile>script.php</scriptfile>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_system_quantummanagermedia.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_system_quantummanagermedia.sys.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.plg_system_quantummanagermedia.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.plg_system_quantummanagermedia.sys.ini</language>
+	</languages>
+
+	<files>
+		<filename plugin="quantummanagermedia">quantummanagermedia.php</filename>
+		<folder>language</folder>
+	</files>
+
+	<updateservers>
+		<server type="extension" priority="1" name="quantummanagermedia">https://hika.su/update/free/plg_quantummanagermedia.xml</server>
+	</updateservers>
+</extension>
