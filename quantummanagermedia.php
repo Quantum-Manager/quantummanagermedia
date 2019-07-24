@@ -1,12 +1,10 @@
 <?php
-
 /**
  * @package    quantummanagermedia
- *
- * @author     Cymbal <cymbal@delo-design.ru>
- * @copyright  Copyright (C) 2019 "Delo Design". All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * @link       https://delo-design.ru
+ * @author     Dmitry Tsymbal <cymbal@delo-design.ru>
+ * @copyright  Copyright © 2019 Delo Design & NorrNext. All rights reserved.
+ * @license    GNU General Public License version 3 or later; see license.txt
+ * @link       https://www.norrnext.com
  */
 
 defined('_JEXEC') or die;
@@ -53,15 +51,19 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	public function onAfterRoute()
 	{
 		$app = Factory::getApplication();
-		if ($app->input->get('option') == 'com_media'
-			&& $app->input->get('view') == 'images')
+		if($app->isClient('administrator'))
 		{
-			$data = $app->input->getArray();
-			$data['option'] = 'com_quantummanager';
-			$data['view'] = 'quantummanager';
-			$data['layout'] = 'modal';
-			$app->redirect('/administrator/index.php?' . http_build_query($data));
+			if ($app->input->get('option') == 'com_media'
+				&& $app->input->get('view') == 'images')
+			{
+				$data = $app->input->getArray();
+				$data['option'] = 'com_quantummanager';
+				$data['view'] = 'quantummanager';
+				$data['layout'] = 'modal';
+				$app->redirect('/administrator/index.php?' . http_build_query($data));
+			}
 		}
+
 	}
 
 

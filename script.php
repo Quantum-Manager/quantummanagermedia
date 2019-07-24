@@ -1,12 +1,12 @@
 <?php
 /**
  * @package    quantummanagermedia
- *
- * @author     tsymb <your@email.com>
- * @copyright  A copyright
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * @link       http://your.url.com
+ * @author     Dmitry Tsymbal <cymbal@delo-design.ru>
+ * @copyright  Copyright © 2019 Delo Design & NorrNext. All rights reserved.
+ * @license    GNU General Public License version 3 or later; see license.txt
+ * @link       https://www.norrnext.com
  */
+
 
 defined('_JEXEC') or die;
 
