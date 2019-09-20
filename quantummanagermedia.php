@@ -60,7 +60,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 				$data['option'] = 'com_quantummanager';
 				$data['view'] = 'quantummanager';
 				$data['layout'] = 'modal';
-				$app->redirect('/administrator/index.php?' . http_build_query($data));
+				$app->redirect('index.php?' . http_build_query($data));
 			}
 		}
 
@@ -73,6 +73,8 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		$app = Factory::getApplication();
 		if ($app->isClient('administrator'))
 		{
+			$data = $app->input->getArray();
+
 			HTMLHelper::_('stylesheet', 'com_quantummanager/modalhelper.css', [
 				'version' => filemtime(__FILE__),
 				'relative' => true
