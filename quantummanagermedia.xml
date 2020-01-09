@@ -2,12 +2,12 @@
 <extension type="plugin" version="3.8" group="system" method="upgrade">
 	<name>PLG_QUANTUMMANAGERMEDIA</name>
 	<creationDate>03.05.2019</creationDate>
-	<author>Cymbal</author>
+	<author>Tsymbal</author>
 	<authorEmail>cymbal@delo-design.ru</authorEmail>
 	<authorUrl>https://www.norrnext.com</authorUrl>
 	<copyright>Copyright © 2019 Delo Design &amp; NorrNext. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see license.txt</license>
-	<version>1.3.1</version>
+	<version>1.3.2</version>
 	<description>PLG_QUANTUMMANAGERMEDIA_XML_DESCRIPTION</description>
 
 	<scriptfile>script.php</scriptfile>
