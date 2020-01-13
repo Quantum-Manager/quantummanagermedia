@@ -25,7 +25,7 @@
 	</files>
 
 	<config>
-		<fields name="params" addfieldpath="/plugins/editors-xtd/quantummanagercontent/fields">
+		<fields name="params">
 			<fieldset name="basic">
 
 				<field name="modal"
