@@ -24,4 +24,21 @@
 		<folder>language</folder>
 	</files>
 
+	<config>
+		<fields name="params" addfieldpath="/plugins/editors-xtd/quantummanagercontent/fields">
+			<fieldset name="basic">
+
+				<field name="modal"
+					   type="radio"
+					   label="PLG_QUANTUMMANAGERMEDIA_MODAL"
+					   required="true"
+					   class="btn-group"
+					   default="0">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+			</fieldset>
+		</fields>
+	</config>
 </extension>
