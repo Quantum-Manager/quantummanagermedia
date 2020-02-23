@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Database\DatabaseDriver;
 
@@ -57,9 +58,11 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 				&& $app->input->get('view') == 'images')
 			{
 				$data = $app->input->getArray();
-				$data['option'] = 'com_quantummanager';
-				$data['view'] = 'quantummanager';
-				$data['layout'] = 'modal';
+				$data['option'] = 'com_ajax';
+				$data['plugin'] = 'quantummanagermedia';
+				$data['format'] = 'html';
+				$data['tmpl'] = 'component';
+
 				$app->redirect('index.php?' . http_build_query($data));
 			}
 		}
@@ -83,5 +86,19 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 	}
 
+	
+	public function onAjaxQuantummanagerbutton()
+	{
+		$app = Factory::getApplication();
+		if($app->isClient('administrator'))
+		{
+			JLoader::register('QuantummanagerHelper', JPATH_ROOT . '/administrator/components/com_quantummanager/helpers/quantummanager.php');
+			QuantummanagerHelper::loadlang();
+			$layout = new FileLayout('default', JPATH_ROOT . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, [
+					'plugins', 'system', 'quantummanagermedia', 'tmpl'
+				]));
+			echo $layout->render();
+		}
+	}
 
 }

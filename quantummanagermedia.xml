@@ -5,7 +5,7 @@
 	<author>Tsymbal</author>
 	<authorEmail>cymbal@delo-design.ru</authorEmail>
 	<authorUrl>https://www.norrnext.com</authorUrl>
-	<copyright>Copyright © 2019 Delo Design &amp; NorrNext. All rights reserved.</copyright>
+	<copyright>Copyright © 2020 Delo Design &amp; NorrNext. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see license.txt</license>
 	<version>1.3.3</version>
 	<description>PLG_QUANTUMMANAGERMEDIA_XML_DESCRIPTION</description>
@@ -18,6 +18,11 @@
 		<language tag="ru-RU">ru-RU/ru-RU.plg_system_quantummanagermedia.ini</language>
 		<language tag="ru-RU">ru-RU/ru-RU.plg_system_quantummanagermedia.sys.ini</language>
 	</languages>
+
+	<media folder="media" destination="plg_system_quantummanagermedia">
+		<folder>css</folder>
+		<folder>js</folder>
+	</media>
 
 	<files>
 		<filename plugin="quantummanagermedia">quantummanagermedia.php</filename>
