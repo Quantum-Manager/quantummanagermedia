@@ -87,7 +87,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	}
 
 
-	public function onAjaxQuantummanagerbutton()
+	public function onAjaxQuantummanagermedia()
 	{
 		$app = Factory::getApplication();
 		if($app->isClient('administrator'))
@@ -100,5 +100,6 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			echo $layout->render();
 		}
 	}
+
 
 }
