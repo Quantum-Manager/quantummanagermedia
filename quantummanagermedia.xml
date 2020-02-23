@@ -27,6 +27,7 @@
 	<files>
 		<filename plugin="quantummanagermedia">quantummanagermedia.php</filename>
 		<folder>language</folder>
+		<folder>tmpl</folder>
 	</files>
 
 </extension>
