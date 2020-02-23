@@ -25,6 +25,8 @@ else
 	$app->getSession()->clear('quantummanagerroot');
 }
 
+$app->getSession()->clear('quantummanageraddscripts');
+
 HTMLHelper::_('stylesheet', 'plg_system_quantummanagermedia/modal.css', [
 	'version' => filemtime(__FILE__),
 	'relative' => true
