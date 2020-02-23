@@ -148,6 +148,9 @@ if($app->input->get('e_name', '') !== '') {
         'inputAlt': '<?php echo Text::_('COM_QUANTUMMANAGER_WINDOW_ALT'); ?>',
         'inputWidth': '<?php echo Text::_('COM_QUANTUMMANAGER_WINDOW_WIDTH'); ?>',
         'inputHeight': '<?php echo Text::_('COM_QUANTUMMANAGER_WINDOW_HEIGHT'); ?>',
+        'inputHspace': '<?php echo Text::_('COM_QUANTUMMANAGER_WINDOW_HSPACE'); ?>',
+        'inputVspace': '<?php echo Text::_('COM_QUANTUMMANAGER_WINDOW_VSPACES'); ?>',
+        'inputAlign': '<?php echo Text::_('COM_QUANTUMMANAGER_WINDOW_ALIGN'); ?>',
     };
 </script>
 

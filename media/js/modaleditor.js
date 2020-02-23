@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         editor = getUrlParameter('e_name'),
                         altInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="alt"]'),
                         widthInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="width"]'),
-                        heightInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="height"]');
+                        heightInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="height"]'),
+                        hspaceInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="hspace"]'),
+                        vspaceInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="vspace"]'),
+                        alignInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="align"]');
 
                     if(altInput !== null) {
                         if(altInput.value !== '') {
@@ -69,15 +72,27 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
 
+                    if(alignInput !== null) {
+                        if(heightInput.value !== '') {
+                            attr.push("align='" + alignInput.value + "'")
+                        }
+                    }
+
+                    if(hspaceInput !== null) {
+                        if(hspaceInput.value !== '') {
+                            attr.push("hspace='" + hspaceInput.value + "'")
+                        }
+                    }
+
+                    if(vspaceInput !== null) {
+                        if(vspaceInput.value !== '') {
+                            attr.push("vspace='" + vspaceInput.value + "'")
+                        }
+                    }
+
                     if (url) {
                         // Set alt attribute
                         attr.push('alt="' + alt + '"');
-
-                        // Set align attribute
-                        if (align && !caption)
-                        {
-                            attr.push('class="pull-' + align + '"');
-                        }
 
                         // Set title attribute
                         if (title)
@@ -140,7 +155,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if(form === null) {
             let html = document.createElement('div');
             html.setAttribute('class', 'modal-form-insert');
-            html.innerHTML = '<div><input type="text" name="alt" value="" placeholder="' + QuantumwindowLang.inputAlt + '"><input type="number" name="width" value="" placeholder="' + QuantumwindowLang.inputWidth + '"><input type="number" name="height" value="" placeholder="' + QuantumwindowLang.inputHeight + '"></div>';
+            html.innerHTML = '<div><input type="text" name="alt" value="" placeholder="' + QuantumwindowLang.inputAlt + '">' +
+                '<input type="number" name="width" value="" placeholder="' + QuantumwindowLang.inputWidth + '">' +
+                '<input type="number" name="height" value="" placeholder="' + QuantumwindowLang.inputHeight + '">' +
+                '<input type="number" name="hspace" value="" placeholder="' + QuantumwindowLang.inputHspace + '">' +
+                '<input type="number" name="vspace" value="" placeholder="' + QuantumwindowLang.inputVspace + '">' +
+                '<select name="align"><option>' + QuantumwindowLang.inputAlign + '</option><option value="top">Top</option><option value="left">Left</option><option value="right">Right</option><option value="bottom">Bottom</option><option value="middle">Middle</option></select>' +
+                '</div>';
             fm.Quantumviewfiles.element.appendChild(html);
             form = html;
         }
