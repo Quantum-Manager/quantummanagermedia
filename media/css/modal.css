@@ -61,8 +61,13 @@ body {
     line-height: 14px;
 }
 
-.modal-form-insert > div > input {
+.modal-form-insert > div > input,
+.modal-form-insert > div > select {
     display: inline-block;
     width: 29%;
     margin: 1% !important;
+}
+
+.modal-form-insert > div > select {
+    width: 30%;
 }
