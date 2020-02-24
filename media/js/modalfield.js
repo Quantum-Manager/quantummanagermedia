@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     response = JSON.parse(response);
 
                     if(response.path !== undefined) {
-                        window.parent.jInsertFieldValue(response.path, getUrlParameter('fieldid'));
+                        window.parent.jInsertFieldValue(response.path, QuantumUtils.getUrlParameter('fieldid'));
 
                         if(window.parent.jModalClose !== undefined) {
                             window.parent.jModalClose();
@@ -87,12 +87,5 @@ document.addEventListener('DOMContentLoaded', function () {
         fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.remove('btn-hide');
 
     });
-
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        let results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
 
 });

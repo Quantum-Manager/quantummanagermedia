@@ -32,7 +32,8 @@ HTMLHelper::_('stylesheet', 'plg_system_quantummanagermedia/modal.css', [
 	'relative' => true
 ]);
 
-if($app->input->get('e_name', '') !== '') {
+if($app->input->get('e_name', '') !== '')
+{
 
 	HTMLHelper::_('jquery.framework');
 
@@ -41,8 +42,9 @@ if($app->input->get('e_name', '') !== '') {
 		'relative' => true
 	]);
 
-
-} else {
+}
+else
+{
 
 	HTMLHelper::_('script', 'plg_system_quantummanagermedia/modalfield.js', [
 		'version' => filemtime(__FILE__),
