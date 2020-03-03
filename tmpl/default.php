@@ -15,6 +15,7 @@ use Joomla\CMS\Language\Text;
 
 $app = Factory::getApplication();
 $folder = $app->input->get('folder', '', 'string');
+$app->getSession()->clear('quantummanageraddscripts');
 
 if(!empty($folder))
 {
