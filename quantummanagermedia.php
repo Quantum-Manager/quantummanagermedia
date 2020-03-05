@@ -147,6 +147,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		return true;
 	}
 
+
 	public function onAjaxQuantummanagermedia()
 	{
 		$app = Factory::getApplication();
