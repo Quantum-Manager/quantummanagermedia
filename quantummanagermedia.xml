@@ -36,6 +36,7 @@
 				<field name="enablemedia"
 					   type="radio"
 					   label="Заменять поле типа media"
+					   description="Поля media в сабформах пока не обрабатываются."
 					   class="btn-group"
 					   default="1">
 					<option value="1">JYES</option>
@@ -49,8 +50,23 @@
 					multiple="true"
 					label="Где можно запускать в административной части"
 					showon="enablemedia:1">
-						<option value=""/>
+						<option value="" />
 				</field>
+				<field name="enablemediapreview"
+					   type="radio"
+					   label="Показывать превью"
+					   class="btn-group"
+					   default="1"
+					   showon="enablemedia:1">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="enablemediapath"
+					   type="text"
+					   label="Путь по умолчанию для быстрой загрузки"
+					   class="btn-group"
+					   default="images"
+					   showon="enablemedia:1"/>
 			</fieldset>
 		</fields>
 	</config>

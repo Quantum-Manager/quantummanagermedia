@@ -104,6 +104,9 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		$component = $app->input->get('option');
 		$view = $app->input->get('view');
 		$enableMedia = (int)$this->params->get('enablemedia', 1);
+		$enablemediapath = $this->params->get('enablemediapath', 'images');
+		$enablemediapreview = (int)$this->params->get('enablemediapreview', 1);
+
 		if ($app->isClient('administrator') && $enableMedia)
 		{
 			$enableMediaComponents = $this->params->get('enablemediaadministratorcomponents', []);
@@ -123,7 +126,9 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 							{
 								$form->setFieldAttribute($name, 'type', 'quantumuploadimage', $group);
 								$form->setFieldAttribute($name, 'addfieldpath', '/libraries/lib_fields/fields/quantumuploadimage', $group);
+								$form->setFieldAttribute($name, 'directory', $enablemediapath, $group);
 								$form->setFieldAttribute($name, 'dropAreaHidden', '1', $group);
+								$form->setFieldAttribute($name, 'uploadAreaHidden', $enablemediapreview, $group);
 							}
 
 						}
@@ -164,6 +169,8 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	protected function fixForComContent(SimpleXMLElement &$node)
 	{
 		$childNodes = $node->children();
+		$enablemediapath = $this->params->get('enablemediapath', 'images');
+		$enablemediapreview = (int)$this->params->get('enablemediapreview', 1);
 
 		if($node->getName() === 'field')
 		{
@@ -173,7 +180,9 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 				{
 					$node['addfieldpath'] = '/libraries/lib_fields/fields/quantumuploadimage';
 					$node['type'] = 'quantumuploadimage';
+					$node['directory'] = $enablemediapath;
 					$node['dropAreaHidden'] = 1;
+					$node['uploadAreaHidden'] = $enablemediapreview;
 				}
 			}
 		}
