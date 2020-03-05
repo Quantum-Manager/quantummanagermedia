@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Form\Form;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Plugin\CMSPlugin;
@@ -87,6 +88,36 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	}
 
 
+	/**
+	 * Adds addition meta title
+	 *
+	 * @param  JForm $form The form to be altered.
+	 * @param  mixed $data The associated data for the form.
+	 *
+	 * @return  boolean
+	 *
+	 * @since   1.0
+	 */
+	function onContentPrepareForm($form, $data)
+	{
+		$app = Factory::getApplication();
+		$component = $app->input->get('option');
+		$view = $app->input->get('view');
+		$enableMedia = (int)$this->params->get('enablemedia', 1);
+		if ($app->isClient('administrator') && $enableMedia)
+		{
+			$enableMediaComponents = $this->params->get('enablemediaadministratorcomponents', []);
+			if(in_array($component . '.' . $view, $enableMediaComponents))
+			{
+				$xml = $form->getXml();
+				$this->processNode($xml);
+				$form->load($xml->asXML());
+			}
+		}
+
+		return true;
+	}
+
 	public function onAjaxQuantummanagermedia()
 	{
 		$app = Factory::getApplication();
@@ -98,6 +129,37 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 					'plugins', 'system', 'quantummanagermedia', 'tmpl'
 				]));
 			echo $layout->render();
+		}
+	}
+
+
+	/**
+	 * @param $base
+	 * @param SimpleXMLElement $node
+	 */
+	protected function processNode(SimpleXMLElement &$node)
+	{
+		$childNodes = $node->children();
+
+		if($node->getName() === 'field')
+		{
+			foreach($node->attributes() as $a => $b)
+			{
+				if((string)$a === 'type' && (string)$b === 'media')
+				{
+					$node['addfieldpath'] = '/libraries/lib_fields/fields/quantumuploadimage';
+					$node['type'] = 'quantumuploadimage';
+					$node['dropAreaHidden'] = '1';
+				}
+			}
+		}
+
+		if (count($childNodes) > 0)
+		{
+			foreach ($childNodes as $chNode)
+			{
+				$this->processNode($chNode);
+			}
 		}
 	}
 

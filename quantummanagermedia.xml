@@ -30,4 +30,29 @@
 		<folder>tmpl</folder>
 	</files>
 
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="enablemedia"
+					   type="radio"
+					   label="Заменять поле типа media"
+					   class="btn-group"
+					   default="1">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					addfieldpath="/libraries/lib_fields/fields/listcomponents"
+					name="enablemediaadministratorcomponents"
+					type="listcomponents"
+					client="administrator"
+					multiple="true"
+					label="Где можно запускать в административной части"
+					showon="enablemedia:1">
+						<option value=""/>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+
 </extension>
