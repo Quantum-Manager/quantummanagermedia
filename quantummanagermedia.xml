@@ -64,6 +64,7 @@
 				<field name="enablemediapath"
 					   type="text"
 					   label="Путь по умолчанию для быстрой загрузки"
+					   description="Можно использовать переменные из Quantum Manager"
 					   class="btn-group"
 					   default="images"
 					   showon="enablemedia:1"/>
