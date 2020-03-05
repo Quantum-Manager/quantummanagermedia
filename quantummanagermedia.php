@@ -109,9 +109,33 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			$enableMediaComponents = $this->params->get('enablemediaadministratorcomponents', []);
 			if(in_array($component . '.' . $view, $enableMediaComponents))
 			{
-				$xml = $form->getXml();
-				$this->processNode($xml);
-				$form->load($xml->asXML());
+				if($component !== 'com_content')
+				{
+					foreach ($form->getFieldsets() as $fieldset)
+					{
+						foreach ($form->getFieldset($fieldset->name) as $field)
+						{
+							$type = $field->__get('type');
+							$name  = $field->__get('fieldname');
+							$group = $field->__get('group');
+
+							if (strtolower($type) === 'media')
+							{
+								$form->setFieldAttribute($name, 'type', 'quantumuploadimage', $group);
+								$form->setFieldAttribute($name, 'addfieldpath', '/libraries/lib_fields/fields/quantumuploadimage', $group);
+								$form->setFieldAttribute($name, 'dropAreaHidden', '1', $group);
+							}
+
+						}
+					}
+				}
+				else
+				{
+					$xml = $form->getXml();
+					$this->fixForComContent($xml);
+					$form->load($xml->asXML());
+				}
+
 			}
 		}
 
@@ -137,7 +161,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	 * @param $base
 	 * @param SimpleXMLElement $node
 	 */
-	protected function processNode(SimpleXMLElement &$node)
+	protected function fixForComContent(SimpleXMLElement &$node)
 	{
 		$childNodes = $node->children();
 
@@ -158,7 +182,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		{
 			foreach ($childNodes as $chNode)
 			{
-				$this->processNode($chNode);
+				$this->fixForComContent($chNode);
 			}
 		}
 	}
