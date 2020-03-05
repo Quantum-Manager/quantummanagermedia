@@ -109,7 +109,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 		if ($app->isClient('administrator') && $enableMedia)
 		{
-			$enableMediaComponents = $this->params->get('enablemediaadministratorcomponents', []);
+			$enableMediaComponents = $this->params->get('enablemediaadministratorcomponents', ['com_content.article']);
 			if(in_array($component . '.' . $view, $enableMediaComponents))
 			{
 				if($component !== 'com_content')
