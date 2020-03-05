@@ -149,7 +149,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 				{
 					$node['addfieldpath'] = '/libraries/lib_fields/fields/quantumuploadimage';
 					$node['type'] = 'quantumuploadimage';
-					$node['dropAreaHidden'] = '1';
+					$node['dropAreaHidden'] = 1;
 				}
 			}
 		}
