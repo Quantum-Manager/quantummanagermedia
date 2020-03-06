@@ -49,8 +49,11 @@
 					client="administrator"
 					multiple="true"
 					label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAADMINISTRATORCOMPONENTS_LABEL"
+					default="com_content.article"
 					showon="enablemedia:1">
-						<option value="" />
+						<option
+							value=""
+						/>
 				</field>
 				<field name="enablemediapreview"
 					   type="radio"

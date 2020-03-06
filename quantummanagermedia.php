@@ -105,7 +105,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		$view = $app->input->get('view');
 		$enableMedia = (int)$this->params->get('enablemedia', 1);
 		$enablemediapath = $this->params->get('enablemediapath', 'images');
-		$enablemediapreview = (int)$this->params->get('enablemediapreview', 1);
+		$enablemediapreview = !(int)$this->params->get('enablemediapreview', 1);
 
 		if ($app->isClient('administrator') && $enableMedia)
 		{
@@ -127,8 +127,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 								$form->setFieldAttribute($name, 'type', 'quantumuploadimage', $group);
 								$form->setFieldAttribute($name, 'addfieldpath', '/libraries/lib_fields/fields/quantumuploadimage', $group);
 								$form->setFieldAttribute($name, 'directory', $enablemediapath, $group);
-								$form->setFieldAttribute($name, 'dropAreaHidden', '1', $group);
-								$form->setFieldAttribute($name, 'uploadAreaHidden', $enablemediapreview, $group);
+								$form->setFieldAttribute($name, 'dropAreaHidden', $enablemediapreview, $group);
 							}
 
 						}
@@ -182,8 +181,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 					$node['addfieldpath'] = '/libraries/lib_fields/fields/quantumuploadimage';
 					$node['type'] = 'quantumuploadimage';
 					$node['directory'] = $enablemediapath;
-					$node['dropAreaHidden'] = 1;
-					$node['uploadAreaHidden'] = $enablemediapreview;
+					$node['dropAreaHidden'] = !$enablemediapreview;
 				}
 			}
 		}
