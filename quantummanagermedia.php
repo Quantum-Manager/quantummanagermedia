@@ -104,7 +104,17 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		$component = $app->input->get('option');
 		$view = $app->input->get('view');
 		$enableMedia = (int)$this->params->get('enablemedia', 1);
-		$enablemediapath = $this->params->get('enablemediapath', 'images');
+		$enablemediapath = $this->params->get('enablemediapath', '');
+
+		if(empty($enablemediapath))
+		{
+			$enablemediapath = 'images';
+		}
+		else
+		{
+			$enablemediapath = 'images/' . $enablemediapath;
+		}
+
 		$enablemediapreview = !(int)$this->params->get('enablemediapreview', 1);
 
 		if ($app->isClient('administrator') && $enableMedia)
@@ -171,6 +181,15 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		$childNodes = $node->children();
 		$enablemediapath = $this->params->get('enablemediapath', 'images');
 		$enablemediapreview = (int)$this->params->get('enablemediapreview', 1);
+
+		if(empty($enablemediapath))
+		{
+			$enablemediapath = 'images';
+		}
+		else
+		{
+			$enablemediapath = 'images/' . $enablemediapath;
+		}
 
 		if($node->getName() === 'field')
 		{

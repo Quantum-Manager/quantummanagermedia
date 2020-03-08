@@ -64,12 +64,14 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="enablemediapath"
-					   type="text"
+				<field addfieldpath="/administrator/components/com_quantummanager/fields"
+					   name="enablemediapath"
+					   type="quantumconfigpath"
+					   prefix="images/"
 					   label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAPATH_LABEL"
 					   description="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAPATH_DESC"
 					   class="btn-group"
-					   default="images"
+					   default=""
 					   showon="enablemedia:1"/>
 			</fieldset>
 		</fields>
