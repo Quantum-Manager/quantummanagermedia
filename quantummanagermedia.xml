@@ -49,6 +49,7 @@
 					client="administrator"
 					multiple="true"
 					label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAADMINISTRATORCOMPONENTS_LABEL"
+					description="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAADMINISTRATORCOMPONENTS_DESC"
 					default="com_content.article"
 					showon="enablemedia:1">
 						<option
