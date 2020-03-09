@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         heightInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="height"]'),
                         hspaceInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="hspace"]'),
                         vspaceInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="vspace"]'),
-                        alignInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="align"]');
+                        alignInput = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="align"]'),
+                        cssClass = fm.Quantumviewfiles.element.querySelector('.modal-form-insert [name="cssclass"]');
 
                     if(altInput !== null) {
                         if(altInput.value !== '') {
@@ -87,6 +88,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     if(vspaceInput !== null) {
                         if(vspaceInput.value !== '') {
                             attr.push("vspace='" + vspaceInput.value + "'")
+                        }
+                    }
+
+                    if(cssClass !== null) {
+                        if(cssClass.value !== '') {
+                            attr.push("class='" + cssClass.value + "'")
                         }
                     }
 
@@ -160,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 '<input type="number" name="height" value="" placeholder="' + QuantumwindowLang.inputHeight + '">' +
                 '<input type="number" name="hspace" value="" placeholder="' + QuantumwindowLang.inputHspace + '">' +
                 '<input type="number" name="vspace" value="" placeholder="' + QuantumwindowLang.inputVspace + '">' +
+                '<input type="text" name="cssclass" value="" placeholder="' + QuantumwindowLang.inputCssClass + '">' +
                 '<select name="align"><option>' + QuantumwindowLang.inputAlign + '</option><option value="top">Top</option><option value="left">Left</option><option value="right">Right</option><option value="bottom">Bottom</option><option value="middle">Middle</option></select>' +
                 '</div>';
             fm.Quantumviewfiles.element.appendChild(html);
