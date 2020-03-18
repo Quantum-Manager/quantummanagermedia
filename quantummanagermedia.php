@@ -13,6 +13,7 @@ use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Database\DatabaseDriver;
@@ -153,6 +154,11 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			}
 		}
 
+		if ($app->isClient('administrator'))
+		{
+			$this->addCssForButtonImage();
+		}
+
 		return true;
 	}
 
@@ -214,5 +220,99 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		}
 	}
 
+
+	protected function addCssForButtonImage()
+	{
+		Factory::getLanguage()->load('plg_editors-xtd_image', JPATH_ADMINISTRATOR);
+		$label = Text::_('PLG_IMAGE_BUTTON_IMAGE');
+		Factory::getDocument()->addStyleDeclaration(<<<EOT
+@media screen and (min-width: 1540px) {
+	.mce-window[aria-label="{$label}"] {
+		top: 10% !important;
+		left: calc((100% - 1400px)/2) !important;
+		width: 1400px !important;
+		height: 80% !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-reset
+	{
+		width: 100% !important;
+		height: 100% !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-window-body {
+		width: 100% !important;
+		height: calc(100% - 96px) !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-foot {
+		width: 100% !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-foot .mce-container-body {
+		width: 100% !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-foot .mce-container-body .mce-widget {
+		left: auto !important;
+		right: 18px !important;
+	}
+}
+
+@media screen and (max-width: 1540px) {
+	.mce-window[aria-label="{$label}"] {
+		left: 2% !important;
+		right: 0 !important;
+		width: 95% !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-reset
+	{
+		width: 100% !important;
+		height: 100% !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-window-body {
+		width: 100% !important;
+		height: calc(100% - 96px) !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-foot {
+		width: 100% !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-foot .mce-container-body {
+		width: 100% !important;
+	}
+	
+	.mce-window[aria-label="{$label}"] .mce-foot .mce-container-body .mce-widget {
+		left: auto !important;
+		right: 18px !important;
+	}
+}
+
+@media screen and (max-height: 700px) {
+
+	.mce-window[aria-label="{$label}"] {
+		top: 2% !important;
+		height: 95% !important;
+	}
+		
+	.mce-window[aria-label="{$label}"] .mce-window-body {
+		height: calc(100% - 96px) !important;
+	}
+			
+}
+
+
+EOT
+		);
+
+		Factory::getDocument()->addScriptDeclaration("window.QuantumwindowPluginMediaLang = { label: '" . $label . "'};");
+		HTMLHelper::_('script', 'plg_system_quantummanagermedia/largeforimagebutton.js', [
+			'version' => filemtime(__FILE__),
+			'relative' => true
+		]);
+	}
 
 }
