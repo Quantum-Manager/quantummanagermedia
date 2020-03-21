@@ -105,7 +105,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		$component = $app->input->get('option');
 		$view = $app->input->get('view');
 		$enableMedia = (int)$this->params->get('enablemedia', 1);
-		$enablemediapath = $this->params->get('enablemediapath', '');
+		$enablemediapath = $this->params->get('enablemediapath', 'upload');
 
 		if(empty($enablemediapath))
 		{
@@ -191,7 +191,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	protected function fixForComContent(SimpleXMLElement &$node)
 	{
 		$childNodes = $node->children();
-		$enablemediapath = $this->params->get('enablemediapath', '');
+		$enablemediapath = $this->params->get('enablemediapath', 'upload');
 		$enablemediapreview = (int)$this->params->get('enablemediapreview', 1);
 
 		if(empty($enablemediapath))
