@@ -191,7 +191,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	protected function fixForComContent(SimpleXMLElement &$node)
 	{
 		$childNodes = $node->children();
-		$enablemediapath = $this->params->get('enablemediapath', 'images');
+		$enablemediapath = $this->params->get('enablemediapath', '');
 		$enablemediapreview = (int)$this->params->get('enablemediapreview', 1);
 
 		if(empty($enablemediapath))
