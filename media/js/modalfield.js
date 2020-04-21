@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     QuantumEventsDispatcher.add('clickFile', function (fm) {
         let file = fm.Quantumviewfiles.file;
 
-        if(file === undefined) {
+        if(file === undefined || fm.Quantumviewfiles.getCountSelected() > 1) {
             fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('btn-hide');
             return;
         }
