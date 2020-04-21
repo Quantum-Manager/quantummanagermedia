@@ -105,15 +105,24 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		$component = $app->input->get('option');
 		$view = $app->input->get('view');
 		$enableMedia = (int)$this->params->get('enablemedia', 1);
-		$enablemediapath = $this->params->get('enablemediapath', 'upload');
+		$enablemediapath = $this->params->get('enablemediapath', '');
+		$path = '';
 
-		if(empty($enablemediapath))
+		JLoader::register('QuantummanagerHelper', JPATH_SITE . '/administrator/components/com_quantummanager/helpers/quantummanager.php');
+
+		$scopes = QuantummanagerHelper::getAllScope();
+		$scope_images = new stdClass();
+		foreach ($scopes as $scope)
 		{
-			$enablemediapath = 'images';
+			if($scope->id === 'images')
+			{
+				$path = QuantummanagerHelper::preparePath($scope->path, false, $scope->id);
+			}
 		}
-		else
+
+		if(!empty($enablemediapath))
 		{
-			$enablemediapath = 'images/' . $enablemediapath;
+			$path = 'images/' . $enablemediapath;
 		}
 
 		$enablemediapreview = !(int)$this->params->get('enablemediapreview', 1);
@@ -136,14 +145,14 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 						foreach ($form->getFieldset($fieldset->name) as $field)
 						{
 							$type = $field->__get('type');
-							$name  = $field->__get('fieldname');
+							$name = $field->__get('fieldname');
 							$group = $field->__get('group');
 
 							if (strtolower($type) === 'media')
 							{
 								$form->setFieldAttribute($name, 'type', 'quantumuploadimage', $group);
 								$form->setFieldAttribute($name, 'addfieldpath', '/libraries/lib_fields/fields/quantumuploadimage', $group);
-								$form->setFieldAttribute($name, 'directory', $enablemediapath, $group);
+								$form->setFieldAttribute($name, 'directory', $path, $group);
 								$form->setFieldAttribute($name, 'dropAreaHidden', $enablemediapreview, $group);
 							}
 
@@ -191,17 +200,28 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	protected function fixForComContent(SimpleXMLElement &$node)
 	{
 		$childNodes = $node->children();
-		$enablemediapath = $this->params->get('enablemediapath', 'upload');
+		$enablemediapath = $this->params->get('enablemediapath', '');
 		$enablemediapreview = (int)$this->params->get('enablemediapreview', 1);
+		$path = '';
 
-		if(empty($enablemediapath))
+		JLoader::register('QuantummanagerHelper', JPATH_SITE . '/administrator/components/com_quantummanager/helpers/quantummanager.php');
+
+		$scopes = QuantummanagerHelper::getAllScope();
+		$scope_images = new stdClass();
+		foreach ($scopes as $scope)
 		{
-			$enablemediapath = 'images';
+			if($scope->id === 'images')
+			{
+				$path = QuantummanagerHelper::preparePath($scope->path, false, $scope->id);
+
+			}
 		}
-		else
+
+		if(!empty($enablemediapath))
 		{
-			$enablemediapath = 'images/' . $enablemediapath;
+			$path = 'images/' . $enablemediapath;
 		}
+
 
 		if($node->getName() === 'field')
 		{
@@ -211,7 +231,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 				{
 					$node['addfieldpath'] = '/libraries/lib_fields/fields/quantumuploadimage';
 					$node['type'] = 'quantumuploadimage';
-					$node['directory'] = $enablemediapath;
+					$node['directory'] = $path;
 					$node['dropAreaHidden'] = !$enablemediapreview;
 				}
 			}
