@@ -1,5 +1,7 @@
 # Quantum Manager Media
 
+Feedback tracker (Трекер для обратной связи): [https://github.com/Quantum-Manager/tracker](https://github.com/Quantum-Manager/tracker)
+
 ## Описание
 Плагин для Quantum Manager, который переопределяет стандартный медиаменеджер в вызывах Joomla!.
 
@@ -20,5 +22,5 @@ GPLv3
 Компания "Деловой дизайн" https://delo-design.ru
 
 ### Поддержка
-- [quantum@hika.su](mailto:quantum@hika.su) (email)
+- [cymbal@delo-design.ru](mailto:cymbal@delo-design.ru) (email)
 - [@tsymbalmitia](tg://resolve?domain=tsymbalmitia) (telegram) 
