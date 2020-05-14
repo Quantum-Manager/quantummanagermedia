@@ -163,7 +163,6 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 				{
 					$xml = $form->getXml();
 					$this->fixForComContent($xml);
-					$form->load($xml->asXML());
 				}
 
 			}
