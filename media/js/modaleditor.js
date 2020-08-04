@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 '<input type="number" name="hspace" value="" placeholder="' + QuantumwindowLang.inputHspace + '">' +
                 '<input type="number" name="vspace" value="" placeholder="' + QuantumwindowLang.inputVspace + '">' +
                 '<input type="text" name="cssclass" value="" placeholder="' + QuantumwindowLang.inputCssClass + '">' +
-                '<select name="align"><option>' + QuantumwindowLang.inputAlign + '</option><option value="top">Top</option><option value="left">Left</option><option value="right">Right</option><option value="bottom">Bottom</option><option value="middle">Middle</option></select>' +
+                '<select name="align"><option value="">' + QuantumwindowLang.inputAlign + '</option><option value="top">Top</option><option value="left">Left</option><option value="right">Right</option><option value="bottom">Bottom</option><option value="middle">Middle</option></select>' +
                 '</div>';
             fm.Quantumviewfiles.element.appendChild(html);
             form = html;
