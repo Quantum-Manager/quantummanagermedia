@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     if(alignInput !== null) {
-                        if(heightInput.value !== '') {
+                        if(alignInput.value !== '') {
                             attr.push("align='" + alignInput.value + "'")
                         }
                     }
