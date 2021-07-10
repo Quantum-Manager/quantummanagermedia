@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             window.parent.jModalClose();
                         }
 
-                        window.parent.jQuery('.modal.in').modal('hide');
+                        window.parent.jQuery('.modal.in').last().modal('hide');
                     }
 
                 });
