@@ -26,6 +26,7 @@ use Joomla\Database\DatabaseDriver;
  */
 class plgSystemQuantummanagermedia extends CMSPlugin
 {
+
 	/**
 	 * Application object
 	 *
@@ -34,6 +35,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	 */
 	protected $app;
 
+
 	/**
 	 * Database object
 	 *
@@ -41,6 +43,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	 * @since  1.0
 	 */
 	protected $db;
+
 
 	/**
 	 * Affects constructor behavior. If true, language files will be loaded automatically.
@@ -53,38 +56,42 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 	public function onAfterRoute()
 	{
-		$app = Factory::getApplication();
-		if($app->isClient('administrator'))
+		if (!$this->app->isClient('administrator'))
 		{
-			if ($app->input->get('option') == 'com_media'
-				&& $app->input->get('view') == 'images')
-			{
-				$data = $app->input->getArray();
-				$data['option'] = 'com_ajax';
-				$data['plugin'] = 'quantummanagermedia';
-				$data['format'] = 'html';
-				$data['tmpl'] = 'component';
-
-				$app->redirect('index.php?' . http_build_query($data));
-			}
+			return;
 		}
+
+		if (
+			$this->app->input->get('option') === 'com_media' &&
+			$this->app->input->get('view') === 'images'
+		)
+		{
+			$data           = $this->app->input->getArray();
+			$data['option'] = 'com_ajax';
+			$data['plugin'] = 'quantummanagermedia';
+			$data['format'] = 'html';
+			$data['tmpl']   = 'component';
+
+			$this->app->redirect('index.php?' . http_build_query($data));
+		}
+
 
 	}
 
 
 	public function onBeforeRender()
 	{
-
-		$app = Factory::getApplication();
-		if ($app->isClient('administrator'))
+		if (!$this->app->isClient('administrator'))
 		{
-			$data = $app->input->getArray();
-
-			HTMLHelper::_('stylesheet', 'com_quantummanager/modalhelper.css', [
-				'version' => filemtime(__FILE__),
-				'relative' => true
-			]);
+			return;
 		}
+
+		$data = $this->app->input->getArray();
+
+		HTMLHelper::_('stylesheet', 'com_quantummanager/modalhelper.css', [
+			'version'  => filemtime(__FILE__),
+			'relative' => true
+		]);
 
 	}
 
@@ -92,8 +99,8 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	/**
 	 * Adds addition meta title
 	 *
-	 * @param  JForm $form The form to be altered.
-	 * @param  mixed $data The associated data for the form.
+	 * @param   JForm  $form  The form to be altered.
+	 * @param   mixed  $data  The associated data for the form.
 	 *
 	 * @return  boolean
 	 *
@@ -101,51 +108,50 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	 */
 	function onContentPrepareForm($form, $data)
 	{
-		$app = Factory::getApplication();
-		$component = $app->input->get('option');
-		$view = $app->input->get('view');
-		$enableMedia = (int)$this->params->get('enablemedia', 1);
+		$component       = $this->app->input->get('option');
+		$view            = $this->app->input->get('view');
+		$enableMedia     = (int) $this->params->get('enablemedia', 1);
 		$enablemediapath = $this->params->get('enablemediapath', '');
-		$path = '';
+		$path            = '';
 
 		JLoader::register('QuantummanagerHelper', JPATH_SITE . '/administrator/components/com_quantummanager/helpers/quantummanager.php');
 
-		$scopes = QuantummanagerHelper::getAllScope();
+		$scopes       = QuantummanagerHelper::getAllScope();
 		$scope_images = new stdClass();
 		foreach ($scopes as $scope)
 		{
-			if($scope->id === 'images')
+			if ($scope->id === 'images')
 			{
 				$path = QuantummanagerHelper::preparePath($scope->path, false, $scope->id);
 			}
 		}
 
-		if(!empty($enablemediapath))
+		if (!empty($enablemediapath))
 		{
 			$path = 'images/' . $enablemediapath;
 		}
 
-		$enablemediapreview = !(int)$this->params->get('enablemediapreview', 1);
+		$enablemediapreview = !(int) $this->params->get('enablemediapreview', 1);
 
-		if ($app->isClient('administrator') && $enableMedia)
+		if ($this->app->isClient('administrator') && $enableMedia)
 		{
 			$enableMediaComponents = $this->params->get('enablemediaadministratorcomponents', ['com_content.article']);
 
-			if(!is_array($enableMediaComponents))
+			if (!is_array($enableMediaComponents))
 			{
 				$enableMediaComponents = ['com_content.article'];
 			}
 
-			if(in_array($component . '.' . $view, $enableMediaComponents, true))
+			if (in_array($component . '.' . $view, $enableMediaComponents, true))
 			{
-				if($component !== 'com_content')
+				if ($component !== 'com_content')
 				{
 					foreach ($form->getFieldsets() as $fieldset)
 					{
 						foreach ($form->getFieldset($fieldset->name) as $field)
 						{
-							$type = $field->__get('type');
-							$name = $field->__get('fieldname');
+							$type  = $field->__get('type');
+							$name  = $field->__get('fieldname');
 							$group = $field->__get('group');
 
 							if (strtolower($type) === 'media')
@@ -180,57 +186,59 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	public function onAjaxQuantummanagermedia()
 	{
 		$app = Factory::getApplication();
-		if($app->isClient('administrator'))
+		if (!$app->isClient('administrator'))
 		{
-			JLoader::register('QuantummanagerHelper', JPATH_ROOT . '/administrator/components/com_quantummanager/helpers/quantummanager.php');
-			QuantummanagerHelper::loadlang();
-			$layout = new FileLayout('default', JPATH_ROOT . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, [
-					'plugins', 'system', 'quantummanagermedia', 'tmpl'
-				]));
-			echo $layout->render();
+			return;
 		}
+
+		JLoader::register('QuantummanagerHelper', JPATH_ROOT . '/administrator/components/com_quantummanager/helpers/quantummanager.php');
+		QuantummanagerHelper::loadlang();
+		$layout = new FileLayout('default', JPATH_ROOT . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, [
+				'plugins', 'system', 'quantummanagermedia', 'tmpl'
+			]));
+		echo $layout->render();
 	}
 
 
 	/**
-	 * @param $base
-	 * @param SimpleXMLElement $node
+	 * @param                     $base
+	 * @param   SimpleXMLElement  $node
 	 */
 	protected function fixForComContent(SimpleXMLElement &$node)
 	{
-		$childNodes = $node->children();
-		$enablemediapath = $this->params->get('enablemediapath', '');
-		$enablemediapreview = (int)$this->params->get('enablemediapreview', 1);
-		$path = '';
+		$childNodes         = $node->children();
+		$enablemediapath    = $this->params->get('enablemediapath', '');
+		$enablemediapreview = (int) $this->params->get('enablemediapreview', 1);
+		$path               = '';
 
 		JLoader::register('QuantummanagerHelper', JPATH_SITE . '/administrator/components/com_quantummanager/helpers/quantummanager.php');
 
-		$scopes = QuantummanagerHelper::getAllScope();
+		$scopes       = QuantummanagerHelper::getAllScope();
 		$scope_images = new stdClass();
 		foreach ($scopes as $scope)
 		{
-			if($scope->id === 'images')
+			if ($scope->id === 'images')
 			{
 				$path = QuantummanagerHelper::preparePath($scope->path, false, $scope->id);
 
 			}
 		}
 
-		if(!empty($enablemediapath))
+		if (!empty($enablemediapath))
 		{
 			$path = 'images/' . $enablemediapath;
 		}
 
 
-		if($node->getName() === 'field')
+		if ($node->getName() === 'field')
 		{
-			foreach($node->attributes() as $a => $b)
+			foreach ($node->attributes() as $a => $b)
 			{
-				if((string)$a === 'type' && (string)$b === 'media')
+				if ((string) $a === 'type' && (string) $b === 'media')
 				{
-					$node['addfieldpath'] = '/libraries/lib_fields/fields/quantumuploadimage';
-					$node['type'] = 'quantumuploadimage';
-					$node['directory'] = $path;
+					$node['addfieldpath']   = '/libraries/lib_fields/fields/quantumuploadimage';
+					$node['type']           = 'quantumuploadimage';
+					$node['directory']      = $path;
 					$node['dropAreaHidden'] = !$enablemediapreview;
 				}
 			}
@@ -248,6 +256,14 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 	protected function addCssForButtonImage()
 	{
+		if (
+			($this->app->getDocument() === null) ||
+			$this->app->getDocument()->getType() !== 'html'
+		)
+		{
+			return;
+		}
+
 		Factory::getLanguage()->load('plg_editors-xtd_image', JPATH_ADMINISTRATOR);
 		$label = Text::_('PLG_IMAGE_BUTTON_IMAGE');
 		Factory::getDocument()->addStyleDeclaration(<<<EOT
@@ -335,7 +351,7 @@ EOT
 
 		Factory::getDocument()->addScriptDeclaration("window.QuantumwindowPluginMediaLang = { label: '" . $label . "'};");
 		HTMLHelper::_('script', 'plg_system_quantummanagermedia/largeforimagebutton.js', [
-			'version' => filemtime(__FILE__),
+			'version'  => filemtime(__FILE__),
 			'relative' => true
 		]);
 	}
