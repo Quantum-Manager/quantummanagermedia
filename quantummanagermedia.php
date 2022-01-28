@@ -174,7 +174,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			}
 		}
 
-		if ($app->isClient('administrator'))
+		if ($this->app->isClient('administrator'))
 		{
 			$this->addCssForButtonImage();
 		}
