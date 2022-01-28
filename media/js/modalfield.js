@@ -13,16 +13,16 @@ document.addEventListener('DOMContentLoaded', function () {
     let pathFile;
     let altFile;
 
-    buttonInsert.setAttribute('class', 'btn btn-primary');
+    buttonInsert.setAttribute('class', 'qm-btn qm-btn-primary');
     buttonInsert.setAttribute('type', 'button');
-    buttonCancel.setAttribute('class', 'btn');
+    buttonCancel.setAttribute('class', 'qm-btn');
     buttonCancel.setAttribute('modal', 'modal');
     buttonCancel.setAttribute('data-dismiss', 'modal');
     buttonCancel.setAttribute('type', 'button');
 
     setTimeout(function () {
         for(let i=0;i<QuantummanagerLists.length;i++) {
-            QuantummanagerLists[i].Quantumtoolbar.buttonAdd('insertFileEditor', 'center', 'file-actions', 'btn-insert btn-primary btn-hide', QuantumwindowLang.buttonInsert, 'quantummanager-icon-insert-inverse', {}, function (ev) {
+            QuantummanagerLists[i].Quantumtoolbar.buttonAdd('insertFileEditor', 'center', 'file-actions', 'qm-btn-insert qm-btn qm-btn-primary qm-btn-hide', QuantumwindowLang.buttonInsert, 'quantummanager-icon-insert-inverse', {}, function (ev) {
 
                 QuantumUtils.ajaxGet(QuantumUtils.getFullUrl("index.php?option=com_quantummanager&task=quantumviewfiles.getParsePath&path=" + encodeURIComponent(pathFile) + '&scope=' + QuantummanagerLists[i].data.scope + '&v=' + QuantumUtils.randomInteger(111111, 999999))).done(function (response) {
                     response = JSON.parse(response);
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let file = fm.Quantumviewfiles.objectSelect;
 
         if(file === undefined) {
-            fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('btn-hide');
+            fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('qm-btn-hide');
             return;
         }
     });
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let file = fm.Quantumviewfiles.file;
 
         if(file === undefined || fm.Quantumviewfiles.getCountSelected() > 1) {
-            fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('btn-hide');
+            fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('qm-btn-hide');
             return;
         }
 
@@ -71,19 +71,19 @@ document.addEventListener('DOMContentLoaded', function () {
             pathFile = fm.data.path + '/' + name;
             name.split('.').pop();
             altFile = name[0];
-            fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.remove('btn-hide');
+            fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.remove('qm-btn-hide');
         } else {
-            fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('btn-hide');
+            fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('qm-btn-hide');
         }
 
     });
 
     QuantumEventsDispatcher.add('reloadPaths', function (fm) {
-        fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('btn-hide');
+        fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('qm-btn-hide');
     });
 
     QuantumEventsDispatcher.add('updatePath', function (fm) {
-        fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('btn-hide');
+        fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.add('qm-btn-hide');
     });
 
     QuantumEventsDispatcher.add('uploadComplete', function (fm) {
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
         pathFile = fm.data.path + '/' + fm.Qantumupload.filesLists[0];
         name.split('.').pop();
         altFile = name[0];
-        fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.remove('btn-hide');
+        fm.Quantumtoolbar.buttonsList['insertFileEditor'].classList.remove('qm-btn-hide');
 
     });
 
