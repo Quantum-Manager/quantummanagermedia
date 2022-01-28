@@ -56,7 +56,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 	public function onAfterRoute()
 	{
-		if (!$this->app->isClient('administrator'))
+		if (!$this->accessCheck())
 		{
 			return;
 		}
@@ -81,7 +81,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 	public function onBeforeRender()
 	{
-		if (!$this->app->isClient('administrator'))
+		if (!$this->accessCheck())
 		{
 			return;
 		}
@@ -133,7 +133,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 		$enablemediapreview = !(int) $this->params->get('enablemediapreview', 1);
 
-		if ($this->app->isClient('administrator') && $enableMedia)
+		if ($this->accessCheck() && $enableMedia)
 		{
 			$enableMediaComponents = $this->params->get('enablemediaadministratorcomponents', ['com_content.article']);
 
@@ -185,8 +185,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 	public function onAjaxQuantummanagermedia()
 	{
-		$app = Factory::getApplication();
-		if (!$app->isClient('administrator'))
+		if (!$this->accessCheck())
 		{
 			return;
 		}
@@ -354,6 +353,32 @@ EOT
 			'version'  => filemtime(__FILE__),
 			'relative' => true
 		]);
+	}
+
+
+	protected function accessCheck()
+	{
+
+		if ($this->app->isClient('administrator'))
+		{
+			return true;
+		}
+
+		// проверяем на включенность параметра
+		JLoader::register('QuantummanagerHelper', JPATH_ADMINISTRATOR . '/components/com_quantummanager/helpers/quantummanager.php');
+
+		if(!(int)QuantummanagerHelper::getParamsComponentValue('front', 0))
+		{
+			return false;
+		}
+
+		// проверяем что пользователь авторизован
+		if(Factory::getUser()->id === 0)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 }
