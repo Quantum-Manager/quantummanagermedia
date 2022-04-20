@@ -31,7 +31,7 @@ class plgSystemQuantummanagermediaInstallerScript
 	 */
 	public function postflight($route, $adapter) {
 
-		if (!(new Version())->isCompatible('4.0'))
+		if (version_compare((new Version())->getShortVersion(), '4.0', '<'))
 		{
 			$db = Factory::getDbo();
 			$query = $db->getQuery( true );
