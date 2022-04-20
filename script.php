@@ -29,7 +29,7 @@ class plgSystemQuantummanagermediaInstallerScript
 	 *
 	 * @return  boolean  True on success
 	 */
-	public function postflight($route, JAdapterInstance $adapter) {
+	public function postflight($route, $adapter) {
 
 		if (!(new Version())->isCompatible('4.0'))
 		{
