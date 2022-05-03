@@ -135,11 +135,11 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 		if ($this->accessCheck() && $enableMedia)
 		{
-			$enableMediaComponents = $this->params->get('enablemediaadministratorcomponents', ['com_content.article']);
+			$enableMediaComponents = $this->params->get('enablemediaadministratorcomponents', ['com_content.article', 'com_content.form']);
 
 			if (!is_array($enableMediaComponents))
 			{
-				$enableMediaComponents = ['com_content.article'];
+				$enableMediaComponents = ['com_content.article', 'com_content.form'];
 			}
 
 			if (in_array($component . '.' . $view, $enableMediaComponents, true))
@@ -367,13 +367,13 @@ EOT
 		// проверяем на включенность параметра
 		JLoader::register('QuantummanagerHelper', JPATH_ADMINISTRATOR . '/components/com_quantummanager/helpers/quantummanager.php');
 
-		if(!(int)QuantummanagerHelper::getParamsComponentValue('front', 0))
+		if (!(int) QuantummanagerHelper::getParamsComponentValue('front', 0))
 		{
 			return false;
 		}
 
 		// проверяем что пользователь авторизован
-		if(Factory::getUser()->id === 0)
+		if (Factory::getUser()->id === 0)
 		{
 			return false;
 		}
