@@ -233,7 +233,10 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		{
 			foreach ($node->attributes() as $a => $b)
 			{
-				if ((string) $a === 'type' && (string) $b === 'media')
+				if (
+					((string) $a === 'type' && (string) $b === 'media')
+					//|| ((string) $a === 'type' && (string) $b === 'accessiblemedia')
+				)
 				{
 					$node['addfieldpath']   = '/libraries/lib_fields/fields/quantumuploadimage';
 					$node['type']           = 'quantumuploadimage';
