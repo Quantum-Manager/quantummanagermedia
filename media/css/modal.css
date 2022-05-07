@@ -37,6 +37,7 @@ body {
     right: 0;
     bottom: 0;
     margin-bottom: 0;
+    z-index: 2;
 }
 
 .modal-form-insert.active {
