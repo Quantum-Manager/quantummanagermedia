@@ -144,6 +144,8 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 			if (in_array($component . '.' . $view, $enableMediaComponents, true))
 			{
+				Form::addFieldPath(JPATH_ROOT . '/libraries/lib_fields/fields/quantumuploadimage');
+
 				if ($component !== 'com_content')
 				{
 					foreach ($form->getFieldsets() as $fieldset)
