@@ -109,6 +109,7 @@ else
 			];
 		}
 
+        /*
         if((int)QuantummanagerHelper::getParamsComponentValue('pexels', '1'))
         {
             $fields['quantumpexels'] = [
@@ -116,6 +117,7 @@ else
                 'position' => 'bottom'
             ];
         }
+        */
 
         /*
 		if((int)QuantummanagerHelper::getParamsComponentValue('pixabay', '1'))
