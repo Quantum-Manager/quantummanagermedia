@@ -62,8 +62,11 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		}
 
 		if (
-			$this->app->input->get('option') === 'com_media' &&
-			$this->app->input->get('view') === 'images'
+			(
+				$this->app->input->get('option') === 'com_media' &&
+				$this->app->input->get('view') === 'images'
+			) ||
+			$this->app->input->getString('qm', '0') === '1'
 		)
 		{
 			$data           = $this->app->input->getArray();
