@@ -74,6 +74,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			$data['plugin'] = 'quantummanagermedia';
 			$data['format'] = 'html';
 			$data['tmpl']   = 'component';
+			unset($data['qm']);
 
 			$this->app->redirect('index.php?' . http_build_query($data));
 		}
