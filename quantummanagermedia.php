@@ -54,8 +54,27 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	protected $autoloadLanguage = true;
 
 
+	protected $install_quantummanager = false;
+
+
+	public function __construct(&$subject, $config = array())
+	{
+		parent::__construct($subject, $config);
+
+		if(file_exists(JPATH_SITE . '/administrator/components/com_quantummanager/helpers/quantummanager.php'))
+		{
+			$this->install_quantummanager = true;
+		}
+
+	}
+
 	public function onAfterRoute()
 	{
+		if(!$this->install_quantummanager)
+		{
+			return;
+		}
+
 		if (!$this->accessCheck())
 		{
 			return;
@@ -85,6 +104,11 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 	public function onBeforeRender()
 	{
+		if(!$this->install_quantummanager)
+		{
+			return;
+		}
+
 		if (!$this->accessCheck())
 		{
 			return;
@@ -110,8 +134,14 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 	 *
 	 * @since   1.0
 	 */
-	function onContentPrepareForm($form, $data)
+	public function onContentPrepareForm($form, $data)
 	{
+
+		if(!$this->install_quantummanager)
+		{
+			return;
+		}
+
 		$component       = $this->app->input->get('option');
 		$view            = $this->app->input->get('view');
 		$enableMedia     = (int) $this->params->get('enablemedia', 1);
@@ -185,12 +215,16 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			$this->addCssForButtonImage();
 		}
 
-		return true;
 	}
 
 
 	public function onAjaxQuantummanagermedia()
 	{
+		if(!$this->install_quantummanager)
+		{
+			return;
+		}
+
 		if (!$this->accessCheck())
 		{
 			return;
