@@ -197,6 +197,16 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 								$form->setFieldAttribute($name, 'directory', $path, $group);
 								$form->setFieldAttribute($name, 'dropAreaHidden', $enablemediapreview, $group);
 							}
+							if (strtolower($type) === 'subform')
+							{
+								$formsource = $field->__get('formsource');
+								if(!is_null($formsource) && trim($formsource) !== '') {
+									$subformxml = new SimpleXMLElement($formsource);
+									$this->fixForComContent($subformxml);
+									$formsource_modified = $subformxml->asXML();
+									$form->setFieldAttribute($name, 'formsource', $formsource_modified, $group);
+								}
+							}
 
 						}
 					}
