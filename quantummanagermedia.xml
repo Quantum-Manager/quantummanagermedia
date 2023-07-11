@@ -7,7 +7,7 @@
 	<authorUrl>https://www.norrnext.com</authorUrl>
 	<copyright>Copyright © 2020 Delo Design &amp; NorrNext. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see license.txt</license>
-	<version>1.6</version>
+	<version>1.7</version>
 	<description>PLG_QUANTUMMANAGERMEDIA_XML_DESCRIPTION</description>
 
 	<scriptfile>script.php</scriptfile>
@@ -51,6 +51,7 @@
 					label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAADMINISTRATORCOMPONENTS_LABEL"
 					description="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAADMINISTRATORCOMPONENTS_DESC"
 					default="com_content.article"
+					layout="joomla.form.field.list-fancy-select"
 					showon="enablemedia:1">
 						<option
 							value=""
