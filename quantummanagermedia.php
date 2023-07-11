@@ -172,7 +172,12 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			}
 
 			Form::addFieldPath(JPATH_ROOT . '/libraries/lib_fields/fields/quantumuploadimage');
-			$form->postProcess($data);
+
+			if(QuantummanagerHelper::isJoomla4())
+			{
+				$form->postProcess($data);
+			}
+
 			$xml = $form->getXml();
 			$this->replaceFieldMedia($xml);
 
