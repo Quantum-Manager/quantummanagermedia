@@ -239,11 +239,11 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 				{
 					$enablemediapath    = $this->params->get('enablemediapath', '');
 					$enablemediapreview = (int) $this->params->get('enablemediapreview', 1);
-					$path               = '';
+					$path               = 'images';
 
 					if (!empty($enablemediapath))
 					{
-						$path = 'images/' . $enablemediapath;
+						$path .= '/' . $enablemediapath;
 					}
 
 					$node['addfieldpath']   = '/libraries/lib_fields/fields/quantumaccessiblemedia';
