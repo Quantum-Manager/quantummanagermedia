@@ -220,35 +220,19 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			{
 				if (((string) $a === 'type' && (string) $b === 'media'))
 				{
-					$enablemediapath    = $this->params->get('enablemediapath', '');
-					$enablemediapreview = (int) $this->params->get('enablemediapreview', 1);
-					$path               = '';
-
-					if (!empty($enablemediapath))
-					{
-						$path = 'images/' . $enablemediapath;
-					}
-
+					$enablemediapreview     = (int) $this->params->get('enablemediapreview', 1);
 					$node['addfieldpath']   = '/libraries/lib_fields/fields/quantumuploadimage';
 					$node['type']           = 'quantumuploadimage';
-					$node['directory']      = $path;
+					$node['directory']      = $this->params->get('enablemediapath', '');
 					$node['dropAreaHidden'] = !$enablemediapreview;
 				}
 
 				if (((string) $a === 'type' && (string) $b === 'accessiblemedia'))
 				{
-					$enablemediapath    = $this->params->get('enablemediapath', '');
-					$enablemediapreview = (int) $this->params->get('enablemediapreview', 1);
-					$path               = 'images';
-
-					if (!empty($enablemediapath))
-					{
-						$path .= '/' . $enablemediapath;
-					}
-
+					$enablemediapreview     = (int) $this->params->get('enablemediapreview', 1);
 					$node['addfieldpath']   = '/libraries/lib_fields/fields/quantumaccessiblemedia';
 					$node['type']           = 'quantumaccessiblemedia';
-					$node['directory']      = $path;
+					$node['directory']      = $this->params->get('enablemediapath', '');
 					$node['dropAreaHidden'] = !$enablemediapreview;
 				}
 			}
