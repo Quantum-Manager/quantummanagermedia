@@ -1,67 +1,43 @@
-<?php
-/**
- * @package    quantummanagermedia
- * @author     Dmitry Tsymbal <cymbal@delo-design.ru>
- * @copyright  Copyright © 2019 Delo Design & NorrNext. All rights reserved.
- * @license    GNU General Public License version 3 or later; see license.txt
- * @link       https://www.norrnext.com
- */
+<?php namespace Joomla\Plugin\System\QuantumManagerMedia\Extension;
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
-use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Plugin\CMSPlugin;
-use Joomla\Database\DatabaseDriver;
+use Joomla\Component\QuantumManager\Administrator\Helper\QuantummanagerHelper;
+use Joomla\Event\SubscriberInterface;
+use SimpleXMLElement;
 
-/**
- * Quantummanagermedia plugin.
- *
- * @package  quantummanagermedia
- * @since    1.0
- */
-class plgSystemQuantummanagermedia extends CMSPlugin
+class QuantumManagerMedia extends CMSPlugin implements SubscriberInterface
 {
 
-	/**
-	 * Application object
-	 *
-	 * @var    CMSApplication
-	 * @since  1.0
-	 */
 	protected $app;
 
-
-	/**
-	 * Database object
-	 *
-	 * @var    DatabaseDriver
-	 * @since  1.0
-	 */
 	protected $db;
 
-
-	/**
-	 * Affects constructor behavior. If true, language files will be loaded automatically.
-	 *
-	 * @var    boolean
-	 * @since  1.0
-	 */
 	protected $autoloadLanguage = true;
 
+	public static function getSubscribedEvents(): array
+	{
+		return [
+			'onAfterRoute'              => 'onAfterRoute',
+			'onBeforeRender'            => 'onBeforeRender',
+			'onContentPrepareForm'      => 'onContentPrepareForm',
+			'onAjaxQuantummanagermedia' => 'onAjaxQuantummanagermedia',
+		];
+	}
 
 	protected $install_quantummanager = false;
-
 
 	public function __construct(&$subject, $config = array())
 	{
 		parent::__construct($subject, $config);
 
-		if (file_exists(JPATH_SITE . '/administrator/components/com_quantummanager/quantummanager.php'))
+		if (file_exists(JPATH_SITE . '/administrator/components/com_quantummanager/services/provider.php'))
 		{
 			$this->install_quantummanager = true;
 		}
@@ -101,7 +77,6 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 	}
 
-
 	public function onBeforeRender()
 	{
 		if (!$this->install_quantummanager)
@@ -114,8 +89,6 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			return;
 		}
 
-		$data = $this->app->input->getArray();
-
 		HTMLHelper::_('stylesheet', 'com_quantummanager/modalhelper.css', [
 			'version'  => filemtime(__FILE__),
 			'relative' => true
@@ -123,11 +96,10 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 
 	}
 
-
 	/**
 	 * Adds addition meta title
 	 *
-	 * @param   JForm  $form  The form to be altered.
+	 * @param   Form  $form  The form to be altered.
 	 * @param   mixed  $data  The associated data for the form.
 	 *
 	 * @return  boolean
@@ -145,8 +117,6 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		$component   = $this->app->input->get('option');
 		$view        = $this->app->input->get('view');
 		$enableMedia = (int) $this->params->get('enablemedia', 1);
-
-		JLoader::register('QuantummanagerHelper', JPATH_SITE . '/administrator/components/com_quantummanager/helpers/quantummanager.php');
 
 		if ($this->accessCheck() && $enableMedia)
 		{
@@ -172,6 +142,7 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			}
 
 			Form::addFieldPath(JPATH_ROOT . '/libraries/lib_fields/fields/quantumuploadimage');
+
 			$xml = $form->getXml();
 			$this->replaceFieldMedia($xml);
 
@@ -183,7 +154,6 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 		}
 
 	}
-
 
 	public function onAjaxQuantummanagermedia()
 	{
@@ -197,14 +167,12 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			return;
 		}
 
-		JLoader::register('QuantummanagerHelper', JPATH_ROOT . '/administrator/components/com_quantummanager/helpers/quantummanager.php');
 		QuantummanagerHelper::loadlang();
 		$layout = new FileLayout('default', JPATH_ROOT . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, [
 				'plugins', 'system', 'quantummanagermedia', 'tmpl'
 			]));
 		echo $layout->render();
 	}
-
 
 	/**
 	 * @param                     $base
@@ -246,7 +214,6 @@ class plgSystemQuantummanagermedia extends CMSPlugin
 			}
 		}
 	}
-
 
 	protected function addCssForButtonImage()
 	{
@@ -360,7 +327,6 @@ EOT
 		}
 
 		// проверяем на включенность параметра
-		JLoader::register('QuantummanagerHelper', JPATH_ADMINISTRATOR . '/components/com_quantummanager/helpers/quantummanager.php');
 
 		if (!(int) QuantummanagerHelper::getParamsComponentValue('front', 0))
 		{

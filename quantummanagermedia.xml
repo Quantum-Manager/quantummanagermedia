@@ -1,82 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" version="3.8" group="system" method="upgrade">
-	<name>PLG_QUANTUMMANAGERMEDIA</name>
-	<creationDate>03.05.2019</creationDate>
-	<author>Tsymbal</author>
-	<authorEmail>cymbal@delo-design.ru</authorEmail>
-	<authorUrl>https://www.norrnext.com</authorUrl>
-	<copyright>Copyright © 2020 Delo Design &amp; NorrNext. All rights reserved.</copyright>
-	<license>GNU General Public License version 3 or later; see license.txt</license>
-	<version>1.8</version>
-	<description>PLG_QUANTUMMANAGERMEDIA_XML_DESCRIPTION</description>
+    <name>PLG_QUANTUMMANAGERMEDIA</name>
+    <creationDate>03.05.2019</creationDate>
+    <author>Tsymbal</author>
+    <authorEmail>cymbal@delo-design.ru</authorEmail>
+    <authorUrl>https://www.norrnext.com</authorUrl>
+    <copyright>Copyright © 2020 Delo Design &amp; NorrNext. All rights reserved.</copyright>
+    <license>GNU General Public License version 3 or later; see license.txt</license>
+    <version>1.8</version>
+    <description>PLG_QUANTUMMANAGERMEDIA_XML_DESCRIPTION</description>
+    <namespace path="src">Joomla\Plugin\System\QuantumManagerMedia</namespace>
 
-	<scriptfile>script.php</scriptfile>
+    <scriptfile>script.php</scriptfile>
 
-	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.plg_system_quantummanagermedia.ini</language>
-		<language tag="en-GB">en-GB/en-GB.plg_system_quantummanagermedia.sys.ini</language>
-		<language tag="ru-RU">ru-RU/ru-RU.plg_system_quantummanagermedia.ini</language>
-		<language tag="ru-RU">ru-RU/ru-RU.plg_system_quantummanagermedia.sys.ini</language>
-	</languages>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.plg_system_quantummanagermedia.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_system_quantummanagermedia.sys.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.plg_system_quantummanagermedia.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.plg_system_quantummanagermedia.sys.ini</language>
+    </languages>
 
-	<media folder="media" destination="plg_system_quantummanagermedia">
-		<folder>css</folder>
-		<folder>js</folder>
-	</media>
+    <media folder="media" destination="plg_system_quantummanagermedia">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
 
-	<files>
-		<filename plugin="quantummanagermedia">quantummanagermedia.php</filename>
-		<folder>language</folder>
-		<folder>tmpl</folder>
-	</files>
+    <files>
+        <folder plugin="quantummanagermedia">src</folder>
+        <folder>language</folder>
+        <folder>services</folder>
+        <folder>tmpl</folder>
+    </files>
 
-	<config>
-		<fields name="params">
-			<fieldset name="basic">
-				<field name="enablemedia"
-					   type="radio"
-					   label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIA_LABEL"
-					   description="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIA_DESC"
-					   class="btn-group"
-					   default="1">
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field
-					addfieldpath="/libraries/lib_fields/fields/listcomponents"
-					name="enablemediaadministratorcomponents"
-					type="listcomponents"
-					client="administrator"
-					multiple="true"
-					label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAADMINISTRATORCOMPONENTS_LABEL"
-					description="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAADMINISTRATORCOMPONENTS_DESC"
-					default="com_content.article"
-					layout="joomla.form.field.list-fancy-select"
-					showon="enablemedia:1">
-						<option
-							value=""
-						/>
-				</field>
-				<field name="enablemediapreview"
-					   type="radio"
-					   label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAPREVIEW_LABEL"
-					   class="btn-group"
-					   default="1"
-					   showon="enablemedia:1">
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field addfieldpath="/administrator/components/com_quantummanager/fields"
-					   name="enablemediapath"
-					   type="quantumconfigpath"
-					   prefix="images/"
-					   label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAPATH_LABEL"
-					   description="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAPATH_DESC"
-					   class="btn-group"
-					   default=""
-					   showon="enablemedia:1"/>
-			</fieldset>
-		</fields>
-	</config>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="enablemedia"
+                       type="radio"
+                       label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIA_LABEL"
+                       description="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIA_DESC"
+                       class="btn-group"
+                       default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field
+                        addfieldpath="/libraries/lib_fields/fields/listcomponents"
+                        name="enablemediaadministratorcomponents"
+                        type="listcomponents"
+                        client="administrator"
+                        multiple="true"
+                        label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAADMINISTRATORCOMPONENTS_LABEL"
+                        description="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAADMINISTRATORCOMPONENTS_DESC"
+                        default="com_content.article"
+                        layout="joomla.form.field.list-fancy-select"
+                        showon="enablemedia:1">
+                    <option
+                            value=""
+                    />
+                </field>
+                <field name="enablemediapreview"
+                       type="radio"
+                       label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAPREVIEW_LABEL"
+                       class="btn-group"
+                       default="1"
+                       showon="enablemedia:1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field addfieldpath="/administrator/components/com_quantummanager/fields"
+                       name="enablemediapath"
+                       type="quantumconfigpath"
+                       prefix="images/"
+                       label="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAPATH_LABEL"
+                       description="PLG_QUANTUMMANAGERMEDIA_CONFIG_ENABLEMEDIAPATH_DESC"
+                       class="btn-group"
+                       default=""
+                       showon="enablemedia:1"/>
+            </fieldset>
+        </fields>
+    </config>
 
 </extension>
