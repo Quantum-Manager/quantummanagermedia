@@ -9,10 +9,9 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Component\QuantumManager\Administrator\Helper\QuantummanagerHelper;
-use Joomla\Event\SubscriberInterface;
 use SimpleXMLElement;
 
-class QuantumManagerMedia extends CMSPlugin implements SubscriberInterface
+class QuantumManagerMedia extends CMSPlugin
 {
 
 	protected $app;
@@ -20,16 +19,6 @@ class QuantumManagerMedia extends CMSPlugin implements SubscriberInterface
 	protected $db;
 
 	protected $autoloadLanguage = true;
-
-	public static function getSubscribedEvents(): array
-	{
-		return [
-			'onAfterRoute'              => 'onAfterRoute',
-			'onBeforeRender'            => 'onBeforeRender',
-			'onContentPrepareForm'      => 'onContentPrepareForm',
-			'onAjaxQuantummanagermedia' => 'onAjaxQuantummanagermedia',
-		];
-	}
 
 	protected $install_quantummanager = false;
 
