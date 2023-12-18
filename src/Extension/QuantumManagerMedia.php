@@ -99,7 +99,7 @@ class QuantumManagerMedia extends CMSPlugin implements SubscriberInterface
 	/**
 	 * Adds addition meta title
 	 *
-	 * @param   Form  $form  The form to be altered.
+	 * @param   Form   $form  The form to be altered.
 	 * @param   mixed  $data  The associated data for the form.
 	 *
 	 * @return  boolean
@@ -140,8 +140,6 @@ class QuantumManagerMedia extends CMSPlugin implements SubscriberInterface
 					QuantummanagerHelper::preparePath($scope->path, false, $scope->id);
 				}
 			}
-
-			Form::addFieldPath(JPATH_ROOT . '/libraries/lib_fields/fields/quantumuploadimage');
 
 			$xml = $form->getXml();
 			$this->replaceFieldMedia($xml);
@@ -189,8 +187,8 @@ class QuantumManagerMedia extends CMSPlugin implements SubscriberInterface
 				if (((string) $a === 'type' && (string) $b === 'media'))
 				{
 					$enablemediapreview     = (int) $this->params->get('enablemediapreview', 1);
-					$node['addfieldpath']   = '/libraries/lib_fields/fields/quantumuploadimage';
-					$node['type']           = 'quantumuploadimage';
+					$node['addfieldprefix'] = 'JPATHRU\\Libraries\\Fields\\Field\\QuantumUploadImageField';
+					$node['type']           = 'QuantumUploadImageField';
 					$node['directory']      = $this->params->get('enablemediapath', '');
 					$node['dropAreaHidden'] = !$enablemediapreview;
 				}
@@ -198,8 +196,8 @@ class QuantumManagerMedia extends CMSPlugin implements SubscriberInterface
 				if (((string) $a === 'type' && (string) $b === 'accessiblemedia'))
 				{
 					$enablemediapreview     = (int) $this->params->get('enablemediapreview', 1);
-					$node['addfieldpath']   = '/libraries/lib_fields/fields/quantumaccessiblemedia';
-					$node['type']           = 'quantumaccessiblemedia';
+					$node['addfieldprefix'] = 'JPATHRU\\Libraries\\Fields\\Field\\QuantumAccessibleMedia';
+					$node['type']           = 'QuantumAccessibleMedia';
 					$node['directory']      = $this->params->get('enablemediapath', '');
 					$node['dropAreaHidden'] = !$enablemediapreview;
 				}
