@@ -45,7 +45,7 @@
                     <option value="0">JNO</option>
                 </field>
                 <field
-                        addfieldpath="/libraries/lib_fields/fields/listcomponents"
+                        addfieldprefix="JPATHRU\Libraries\Fields\Field\ListComponents"
                         name="enablemediaadministratorcomponents"
                         type="listcomponents"
                         client="administrator"
@@ -68,7 +68,7 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-                <field addfieldpath="/administrator/components/com_quantummanager/fields"
+                <field addfieldprefix="Joomla\Component\QuantumManager\Administrator\Field"
                        name="enablemediapath"
                        type="quantumconfigpath"
                        prefix="images/"
