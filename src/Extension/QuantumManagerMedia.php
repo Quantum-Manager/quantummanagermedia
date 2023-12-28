@@ -186,7 +186,7 @@ class QuantumManagerMedia extends CMSPlugin
 				{
 					$enablemediapreview     = (int) $this->params->get('enablemediapreview', 1);
 					$node['addfieldprefix'] = 'JPATHRU\\Libraries\\Fields\\Field\\QuantumAccessibleMedia';
-					$node['type']           = 'Quantumaccessiblemedia';
+					$node['type']           = 'quantumaccessiblemedia';
 					$node['directory']      = $this->params->get('enablemediapath', '');
 					$node['dropAreaHidden'] = !$enablemediapreview;
 				}
