@@ -176,7 +176,7 @@ class QuantumManagerMedia extends CMSPlugin
 				if (((string) $a === 'type' && (string) $b === 'media'))
 				{
 					$enablemediapreview     = (int) $this->params->get('enablemediapreview', 1);
-					$node['addfieldprefix'] = 'JPATHRU\\Libraries\\Fields\\Field\\QuantumUploadImage';
+					$node['addfieldprefix'] = 'JPATHRU\\Libraries\\Fields\\QuantumUploadImage';
 					$node['type']           = 'quantumuploadimage';
 					$node['directory']      = $this->params->get('enablemediapath', '');
 					$node['dropAreaHidden'] = !$enablemediapreview;
@@ -185,7 +185,7 @@ class QuantumManagerMedia extends CMSPlugin
 				if (((string) $a === 'type' && (string) $b === 'accessiblemedia'))
 				{
 					$enablemediapreview     = (int) $this->params->get('enablemediapreview', 1);
-					$node['addfieldprefix'] = 'JPATHRU\\Libraries\\Fields\\Field\\QuantumAccessibleMedia';
+					$node['addfieldprefix'] = 'JPATHRU\\Libraries\\Fields\\QuantumAccessibleMedia';
 					$node['type']           = 'quantumaccessiblemedia';
 					$node['directory']      = $this->params->get('enablemediapath', '');
 					$node['dropAreaHidden'] = !$enablemediapreview;
