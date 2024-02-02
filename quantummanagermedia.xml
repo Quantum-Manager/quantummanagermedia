@@ -45,7 +45,7 @@
                     <option value="0">JNO</option>
                 </field>
                 <field
-                        addfieldprefix="JPATHRU\Libraries\Fields\Field\ListComponents"
+                        addfieldprefix="JPATHRU\Libraries\Fields\ListComponents"
                         name="enablemediaadministratorcomponents"
                         type="listcomponents"
                         client="administrator"
