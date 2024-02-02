@@ -4,6 +4,7 @@
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
+use Joomla\CMS\Form\FormHelper;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\FileLayout;
@@ -129,6 +130,8 @@ class QuantumManagerMedia extends CMSPlugin
 					QuantummanagerHelper::preparePath($scope->path, false, $scope->id);
 				}
 			}
+
+			FormHelper::addFieldPrefix('JPATHRU\\Libraries\\Fields\\QuantumAccessibleMedia');
 
 			$xml = $form->getXml();
 			$this->replaceFieldMedia($xml);
