@@ -127,7 +127,7 @@ class QuantumManagerMedia extends CMSPlugin
 			{
 				if ($scope->id === 'images')
 				{
-					QuantummanagerHelper::preparePath($scope->path, false, $scope->id);
+					QuantummanagerHelper::preparePath('root', false, $scope->id);
 				}
 			}
 
