@@ -38,24 +38,19 @@ HTMLHelper::_('stylesheet', 'plg_system_quantummanagermedia/modal.css', [
 if ($app->input->get('e_name', '') !== '')
 {
 
-	HTMLHelper::_('jquery.framework');
-
 	HTMLHelper::_('script', 'plg_system_quantummanagermedia/modaleditor.js', [
 		'version'  => filemtime(__FILE__),
 		'relative' => true
 	]);
 
 }
-else
+elseif ($app->input->get('asset', '') !== 'com_acym')
 {
-
 	HTMLHelper::_('script', 'plg_system_quantummanagermedia/modalfield.js', [
 		'version'  => filemtime(__FILE__),
 		'relative' => true
 	]);
-
 }
-
 
 ?>
 

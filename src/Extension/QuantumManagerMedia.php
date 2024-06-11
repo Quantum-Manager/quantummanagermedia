@@ -48,8 +48,14 @@ class QuantumManagerMedia extends CMSPlugin
 
 		if (
 			(
-				$this->app->input->get('option') === 'com_media' &&
-				$this->app->input->get('view') === 'images'
+				(
+					$this->app->input->get('option') === 'com_media' &&
+					$this->app->input->get('view') === 'images'
+				) ||
+				(
+					$this->app->input->get('option') === 'com_media' &&
+					$this->app->input->get('asset') === 'com_acym'
+				)
 			) ||
 			$this->app->input->getString('qm', '0') === '1'
 		)
@@ -84,6 +90,17 @@ class QuantumManagerMedia extends CMSPlugin
 			'relative' => true
 		]);
 
+		if (
+			$this->app->input->get('option') === 'com_acym' &&
+			$this->app->input->get('ctrl') === 'campaigns' &&
+			$this->app->input->get('task') === 'edit'
+		)
+		{
+			HTMLHelper::_('script', 'plg_system_quantummanagermedia/modalasym.js', [
+				'version'  => filemtime(__FILE__),
+				'relative' => true
+			]);
+		}
 	}
 
 	/**
