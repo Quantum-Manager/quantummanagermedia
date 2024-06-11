@@ -90,11 +90,7 @@ class QuantumManagerMedia extends CMSPlugin
 			'relative' => true
 		]);
 
-		if (
-			$this->app->input->get('option') === 'com_acym' &&
-			$this->app->input->get('ctrl') === 'campaigns' &&
-			$this->app->input->get('task') === 'edit'
-		)
+		if ($this->app->input->get('option') === 'com_acym')
 		{
 			HTMLHelper::_('script', 'plg_system_quantummanagermedia/modalasym.js', [
 				'version'  => filemtime(__FILE__),
