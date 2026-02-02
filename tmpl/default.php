@@ -52,10 +52,6 @@ elseif ($app->input->get('asset', '') !== 'com_acym')
 	]);
 }
 
-?>
-
-<?php
-
 try
 {
 	$folderRoot = 'root';
@@ -97,13 +93,6 @@ try
 			'position' => 'bottom'
 		],
 	];
-
-	if ((int) QuantummanagerHelper::getParamsComponentValue('unsplash', '1'))
-	{
-		$fields['quantumunsplash'] = [
-			'position' => 'bottom'
-		];
-	}
 
 	$actions = QuantummanagerHelper::getActions();
 	if (!$actions->get('core.create'))
